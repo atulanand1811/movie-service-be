@@ -38,7 +38,7 @@ public class MovieController {
 	MovieService mService;
 
 	@GetMapping("/all")
-	@SecurityRequirement(name = "Bearer Authentication")
+//	@SecurityRequirement(name = "Bearer Authentication")
 	@Operation(summary = "search all movies")
 	public ResponseEntity<List<Movie>> getAllMovies() {
 		log.debug("here u can access all the available movies");
