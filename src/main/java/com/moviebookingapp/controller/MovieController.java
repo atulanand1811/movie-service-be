@@ -52,6 +52,11 @@ public class MovieController {
 		}
 	}
 
+	@GetMapping("/hello")
+	public ResponseEntity<String> sayHello(){
+		return new ResponseEntity<>("Hello, My Backend deployed", HttpStatus.OK);
+	}
+	
 	@GetMapping("/movies/search/{movieName}")
 	@SecurityRequirement(name = "Bearer Authentication")
 	@Operation(summary = "search movies by movie name")
