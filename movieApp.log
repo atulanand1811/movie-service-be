@@ -536,3 +536,4 @@ org.springframework.security.core.userdetails.UsernameNotFoundException: User No
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.63.jar:9.0.63]
 	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 
+2023-10-12 17:51:12.009 ERROR 21860 --- [http-nio-8080-exec-5] c.m.security.jwt.AuthEntryPointJwt       : Unauthorized error: Bad credentials
