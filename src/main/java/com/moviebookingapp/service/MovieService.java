@@ -107,4 +107,18 @@ public class MovieService {
         return res;
 	}
 
+	public String addMovie(Movie movie) {
+		List<Movie> movieList = mRepo.findAvailableTickets(movie.getMovieName(),movie.getTheatreName());
+		if(movieList!=null && !movieList.isEmpty()) {
+			Movie movieNew = movieList.get(0);
+			movieNew.setNoOfTicketsAvailable(movie.getNoOfTicketsAvailable());
+			Movie movie2 = mRepo.save(movieNew);
+			return movie2 != null ? movie.getMovieName() + " Movie Details Updated SuccessFully !!" : "Operation Failed!!";
+
+		}
+		Movie save = mRepo.save(movie);
+		
+		return save != null ? movie.getMovieName() + " Movie Added SuccessFully !!" : "Operation Failed!!";
+	}
+
 }

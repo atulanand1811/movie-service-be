@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moviebookingapp.exception.MoviesNotFound;
@@ -51,11 +52,6 @@ public class MovieController {
 			return new ResponseEntity<>(movieList, HttpStatus.OK);
 		}
 	}
-
-	@GetMapping("/hello")
-	public ResponseEntity<String> sayHello(){
-		return new ResponseEntity<>("Hello, My Backend deployed", HttpStatus.OK);
-	}
 	
 	@GetMapping("/movies/search/{movieName}")
 	@SecurityRequirement(name = "Bearer Authentication")
@@ -87,6 +83,16 @@ public class MovieController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<Ticket>> getAllBookedTickets(@PathVariable String movieName) {
 		return new ResponseEntity<>(mService.getAllBookedTickets(movieName), HttpStatus.OK);
+	}
+	
+	@PostMapping("/addMovie")
+	@SecurityRequirement(name = "Bearer Authentication")
+	@Operation(summary = "get all booked tickets(Admin Only)")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<String> addMovie(@RequestBody Movie movie){
+		movie.setTicketsStatus("Book ASAP");
+		String res = mService.addMovie(movie);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 
 	@PutMapping("/{movieName}/update")
